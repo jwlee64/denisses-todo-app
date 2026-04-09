@@ -3,6 +3,9 @@
 cd "$(dirname "$0")"
 export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 
+echo "Installing dependencies..."
+npm install
+
 echo "Building Denisse's Reading Tracker for Mac..."
 npm run dist:mac
 
