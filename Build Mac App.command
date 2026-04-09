@@ -6,6 +6,11 @@ export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 echo "Building Denisse's Reading Tracker for Mac..."
 npm run dist:mac
 
-echo ""
-echo "Done! Opening dist folder..."
-open dist
+if [ $? -eq 0 ]; then
+  echo ""
+  echo "Done! Opening dist folder..."
+  open dist
+else
+  echo ""
+  echo "Build failed. Check the errors above."
+fi
