@@ -22,7 +22,11 @@ function genId() {
 
 // ---- Date utils ----
 function todayStr() {
-  return new Date().toISOString().slice(0, 10);
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
 function daysBetween(a, b) {
@@ -169,8 +173,17 @@ function renderTaskCard(task) {
   bookSpan.textContent = '📚 ' + task.bookName;
   const dueSpan = el('span', 'task-due' + (overdue ? ' overdue' : ''));
   dueSpan.textContent = dueLabel;
+  const deleteBtn = el('button', 'delete-btn');
+  deleteBtn.textContent = '×';
+  deleteBtn.title = 'Delete task';
+  deleteBtn.addEventListener('click', () => {
+    const tasks = loadTasks().filter(t => t.id !== task.id);
+    saveTasks(tasks);
+    renderApp();
+  });
   header.appendChild(bookSpan);
   header.appendChild(dueSpan);
+  header.appendChild(deleteBtn);
 
   // Meta
   const meta = el('div', 'task-meta');
@@ -233,7 +246,8 @@ function renderApp() {
   }
   empty.classList.add('hidden');
 
-  tasks.forEach(task => {
+  const sorted = tasks.slice().sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+  sorted.forEach(task => {
     list.appendChild(renderTaskCard(task));
   });
 }
@@ -275,7 +289,7 @@ function saveTask() {
   const pages = parsePageRanges(pagesRaw);
   if (!pages) return showError('Invalid page ranges. Use format: 1-10, 20-25, 30-40');
   if (!dueDate) return showError('Please pick a due date.');
-  if (dueDate <= todayStr()) return showError('Due date must be in the future.');
+  if (dueDate < todayStr()) return showError('Due date must be today or in the future.');
 
   const tasks = loadTasks();
 
