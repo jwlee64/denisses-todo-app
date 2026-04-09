@@ -25,4 +25,10 @@ function writeData(data) {
   }
 }
 
-contextBridge.exposeInMainWorld('store', { readData, writeData });
+contextBridge.exposeInMainWorld('store', {
+  readData,
+  writeData,
+  getVersion: () => ipcRenderer.invoke('get-version'),
+  checkForUpdates: () => ipcRenderer.invoke('check-for-updates'),
+  downloadUpdate: (url) => ipcRenderer.invoke('download-update', url)
+});

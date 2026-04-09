@@ -48,7 +48,38 @@ body {
   gap: 10px;
 }
 
-.app-icon { font-size: 22px; }
+.app-icon-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.version-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.btn-update {
+  background: linear-gradient(135deg, #a5d6a7, #80cbc4);
+  color: #1b5e20;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-update:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-update:disabled { opacity: 0.6; cursor: default; transform: none; }
 
 h1 {
   font-size: 18px;

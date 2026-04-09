@@ -345,3 +345,35 @@ document.addEventListener('keydown', (e) => {
 
 // ---- Init ----
 renderApp();
+initVersionCheck();
+
+// ---- Version + update check ----
+async function initVersionCheck() {
+  const version = await window.store.getVersion();
+  const tag = document.getElementById('version-tag');
+  tag.textContent = `v${version}`;
+
+  try {
+    const result = await window.store.checkForUpdates();
+    if (!result.hasUpdate) return;
+
+    const btn = document.getElementById('update-btn');
+    btn.textContent = `⬆ v${result.latestVersion} available`;
+    btn.classList.remove('hidden');
+
+    btn.addEventListener('click', async () => {
+      if (!result.downloadUrl) return;
+      btn.textContent = 'Downloading...';
+      btn.disabled = true;
+      const res = await window.store.downloadUpdate(result.downloadUrl);
+      if (res.success) {
+        btn.textContent = '✓ Open installer to finish';
+      } else {
+        btn.textContent = '⬆ Update available';
+        btn.disabled = false;
+      }
+    });
+  } catch (_) {
+    // silently skip if offline or API fails
+  }
+}

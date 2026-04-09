@@ -10,10 +10,14 @@
 
   <header class="app-header">
     <div class="header-left">
-      <span class="app-icon">📚</span>
+      <img src="icon.png" class="app-icon-img" alt="Capybara">
       <h1>Denisse's Reading Tracker</h1>
     </div>
-    <button class="btn-primary" id="new-task-btn">+ New Task</button>
+    <div class="header-right">
+      <span class="version-tag" id="version-tag"></span>
+      <button class="btn-update hidden" id="update-btn">⬆ Update available</button>
+      <button class="btn-primary" id="new-task-btn">+ New Task</button>
+    </div>
   </header>
 
   <main>
