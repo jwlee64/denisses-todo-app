@@ -1,0 +1,27 @@
+{
+  "name": "denisses-todo-app",
+  "version": "1.0.0",
+  "description": "A reading tracker desktop app for Denisse",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win"
+  },
+  "dependencies": {
+    "electron": "^29.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.0.0"
+  },
+  "build": {
+    "appId": "com.denisse.todoapp",
+    "productName": "Denisse's Todo",
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
