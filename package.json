@@ -17,10 +17,15 @@
     "appId": "com.denisse.todoapp",
     "productName": "Denisse's Todo",
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon": "icon.icns"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "linux": {
+      "icon": "icon.png"
     }
   }
 }

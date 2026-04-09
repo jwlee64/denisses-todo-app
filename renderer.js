@@ -1,18 +1,21 @@
 // ---- Storage ----
-const TASKS_KEY = 'tasks';
-const COMPLETIONS_KEY = 'completions';
+// Uses window.store (preload.js) to persist data to a JSON file on disk.
 
 function loadTasks() {
-  return JSON.parse(localStorage.getItem(TASKS_KEY) || '[]');
+  return window.store.readData().tasks || [];
 }
 function saveTasks(tasks) {
-  localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+  const data = window.store.readData();
+  data.tasks = tasks;
+  window.store.writeData(data);
 }
 function loadCompletions() {
-  return JSON.parse(localStorage.getItem(COMPLETIONS_KEY) || '{}');
+  return window.store.readData().completions || {};
 }
 function saveCompletions(c) {
-  localStorage.setItem(COMPLETIONS_KEY, JSON.stringify(c));
+  const data = window.store.readData();
+  data.completions = c;
+  window.store.writeData(data);
 }
 
 // ---- ID ----
